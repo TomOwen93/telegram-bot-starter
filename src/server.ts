@@ -8,15 +8,17 @@ const bot = new Telegraf(botToken);
 bot.start((ctx) => ctx.reply("Hello!  Let's talk!"));
 bot.help((ctx) => ctx.reply("Hmm i am not programmed to be helpful, yet!"));
 
-bot.command("dicey", handleDiceCommand);
+// bot.command("dicey", handleDiceCommand);
 
-function handleDiceCommand(ctx: Context) {
-  return ctx.reply(new DiceRoll("4d8 + 1d6").total.toString());
-}
+// function handleDiceCommand(ctx: Context) {
+//   return ctx.reply(new DiceRoll("4d8 + 1d6").total.toString());
+// }
 
-// bot.command("dicey", (ctx) =>
-//   ctx.reply(new DiceRoll("4d8 + 1d6").total.toString())
-// );
+bot.command("dice2", (ctx) => {
+  let msg = ctx.message.text;
+  const [_junk, ...args] = msg.split(" ");
+  return ctx.reply(new DiceRoll(args.join(" ")).total.toString());
+});
 
 bot.hears("hello", (ctx) => ctx.reply("Ok, I heard you say hello"));
 bot.hears("cheese", (ctx) =>
